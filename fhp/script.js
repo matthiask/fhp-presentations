@@ -1,3 +1,6 @@
+// TODO rewrite the JS with document.querySelectorAll, Array.prototype.slice.call,
+// classList and friends so that it definitively does not work in old browsers
+// anymore :-)
 $(window).load(function() {
     var $window = $(window),
         slides = $('section'),
