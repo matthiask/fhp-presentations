@@ -1,0 +1,155 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+
+/* cf */
+.cf:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.cf {
+    /*display: inline-block;*/
+}
+
+html[xmlns] .cf {
+    display: block;
+}
+
+* html .cf {
+    height: 1%;
+}
+
+
+/* FHP */
+
+* { box-sizing: border-box; }
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: Lato, "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+    color: #393937;
+    line-height: 1.4;
+}
+
+
+section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    opacity: 0;
+    background-size: 100%;
+    padding: 10% 30%;
+}
+
+section.current {
+    opacity: 1;
+}
+
+section.title {
+    background: url(bg-dunkel.jpg);
+    color: #ffffff;
+    text-align: center;
+}
+
+::selection             { background: #62afd4; color: white; /* Safari */ }
+::-moz-selection    { background: #62afd4; color: white; /* Firefox */ }
+
+
+h1, h2, h3, h4, h5, h6, h {
+}
+
+h1 { font-size: 400%; }
+h2 { font-size: 320%; }
+h3 { font-size: 280%; }
+h4 { font-size: 240%; }
+
+li {
+    font-size: 200%;
+    line-height: 1.5;
+    position: relative;
+    padding: 0 0 0 60px;
+}
+li .marker {
+    background: url(plus.png) 0 0 no-repeat;
+    background-size: 100%;
+    height: 1.2em;
+    width: 1.2em;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    display: block;
+}
+ol li:nth-child(1) .marker { background-image: url(1-blau.png); }
+ol li:nth-child(2) .marker { background-image: url(2-blau.png); }
+ol li:nth-child(3) .marker { background-image: url(3-gruen.png); }
+ol li:nth-child(4) .marker { background-image: url(4-gruen.png); }
+ol li:nth-child(5) .marker { background-image: url(5-gelb-gruen.png); }
+ol li:nth-child(6) .marker { background-image: url(6-gelb.png); }
+ol li:nth-child(7) .marker { background-image: url(7-grau.png); }
+
+li li { font-size: 100%; }
+li li .marker,
+ol li li .marker { background-image: url(plus-grau.png); }
