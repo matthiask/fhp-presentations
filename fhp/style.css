@@ -226,14 +226,16 @@ h2 { font-size: 360%; }
 h3 { font-size: 320%; }
 h4 { font-size: 270%; }
 
+ol, ul { margin: .5em 0; }
 li {
     font-size: 200%;
     line-height: 1.5;
     position: relative;
     padding: 0 0 0 50px;
 }
+ol li { padding-bottom: .5em; }
 li .marker {
-    background: url(plus.png) 0 0 no-repeat;
+    background: url(plus-grau.png) 0 0 no-repeat;
     background-size: 100%;
     height: 1.2em;
     width: 1.2em;
@@ -252,7 +254,7 @@ ol li:nth-child(7) .marker { background-image: url(7-grau.png); }
 
 li li { font-size: 80%; }
 li li .marker,
-ol li li .marker { background-image: url(plus-grau.png); }
+ol li li .marker { background-image: url(plus.png); }
 li ul, li ol { margin-bottom: .2em; }
 
 p { margin: .5em 0; font-size: 120%; }
