@@ -38,8 +38,8 @@ $(window).load(function() {
     }
     mark();
 
-    $('li, .numbered').prepend('<span class="marker"></span>');
-    $('section.numbered').each(function(i, e) {
+    $('li, .title').prepend('<span class="marker"></span>');
+    $('section.title').each(function(i, e) {
         $(e).addClass('n' + i);
     });
 
