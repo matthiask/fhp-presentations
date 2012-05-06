@@ -110,17 +110,27 @@ section.current {
 }
 
 section.big {
-    padding: 3% 5%;
+    padding-top: 8%;
+    padding-bottom: 5%;
+}
+
+section.wide {
+    padding-left: 8%;
+    padding-right: 8%;
 }
 
 section.title {
     background: url(bg-dunkel.jpg);
     color: #ffffff;
-    text-align: center;
 }
 
-section.numbered {
+section.numbered,
+section.quote {
     background: url(bg-hell.jpg);
+}
+
+section.title,
+section.numbered {
     text-align: center;
 }
 
@@ -192,6 +202,21 @@ h1, h2, h3, h4, h5, h6, h {
     font-weight: 700; /* bold */
 }
 
+blockquote {
+    font-family: 'Lato';
+    font-weight: 700;
+    font-style: italic;
+    font-size: 270%;
+    margin: 0 0 .3em 0;
+}
+
+blockquote:before { content: '«'; }
+blockquote:after { content: '»';}
+
+.title p {
+    margin-top: 2.5em;
+}
+
 ul, p {
     font-family: Georgia;
 }
@@ -229,3 +254,5 @@ li li { font-size: 80%; }
 li li .marker,
 ol li li .marker { background-image: url(plus-grau.png); }
 li ul, li ol { margin-bottom: .2em; }
+
+p { margin: .5em 0; font-size: 120%; }
