@@ -10,7 +10,7 @@ $(window).load(function() {
         if (current < 0) current = 0;
         if (current >= slides.length) current = slides.length - 1;
 
-        window.location.hash = '' + current;
+        window.location.hash = 'slide' + current;
 
         slides.filter('.current').removeClass('current');
         slides.eq(current).addClass('current');
@@ -33,7 +33,7 @@ $(window).load(function() {
 
     // initialization
     if (window.location.hash) {
-        current = parseInt(window.location.hash.substr(1));
+        current = parseInt(window.location.hash.substr(6));
         if (isNaN(current)) current = 0;
     }
     mark();
