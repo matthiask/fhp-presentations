@@ -87,7 +87,6 @@ body {
     line-height: 1.4;
 }
 
-
 section {
     position: absolute;
     top: 0;
@@ -100,12 +99,18 @@ section {
     -moz-transition: all 0.2s ease-out;
     transition: all 0.2s ease-out;
     opacity: 0;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
     background-size: 100%;
-    padding: 10% 30%;
+    padding: 13% 20%;
 }
 
 section.current {
     opacity: 1;
+}
+
+section.big {
+    padding: 3% 5%;
 }
 
 section.title {
@@ -114,23 +119,93 @@ section.title {
     text-align: center;
 }
 
+section.numbered {
+    background: url(bg-hell.jpg);
+    text-align: center;
+}
+
+section.numbered .marker {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6em;
+    height: 6em;
+    margin: -3em 0 0 -3em;
+}
+section.n0 .marker { background-image: url(1-blau.png); }
+section.n1 .marker { background-image: url(2-blau.png); }
+section.n2 .marker { background-image: url(3-gruen.png); }
+section.n3 .marker { background-image: url(4-gruen.png); }
+section.n4 .marker { background-image: url(5-gelb-gruen.png); }
+section.n5 .marker { background-image: url(6-gelb.png); }
+section.n6 .marker { background-image: url(7-grau.png); }
+
+
+section.image {
+    background-color: #333;
+}
+section.image h1 {
+    position: absolute;
+    width: 100%;
+    height: 1.5em;
+    left: 0;
+    top: 20%;
+    padding: 0 30px;
+    background: #eee;
+    opacity: 0.5;
+}
+
+section.image.dark {
+    background-color: #eee;
+}
+
+section.image.dark h1 {
+    background: #333;
+    color: #fff;
+}
+
+section.image.bottom h1 {
+    top: 70%;
+}
+
+
 ::selection             { background: #62afd4; color: white; /* Safari */ }
 ::-moz-selection    { background: #62afd4; color: white; /* Firefox */ }
 
 
 h1, h2, h3, h4, h5, h6, h {
+    font-family: 'Lato';
+    font-weight: 900; /* black */
+    opacity: 0.6;
 }
 
-h1 { font-size: 400%; }
-h2 { font-size: 320%; }
-h3 { font-size: 280%; }
-h4 { font-size: 240%; }
+.title h1,
+.numbered h1 {
+    opacity: 1;
+}
+
+.title ol {
+    font-family: 'Lato';
+    font-weight: 700; /* bold */
+}
+
+ul, p {
+    font-family: Georgia;
+}
+
+h1 { font-size: 420%; }
+h2 { font-size: 360%; }
+h3 { font-size: 320%; }
+h4 { font-size: 270%; }
 
 li {
     font-size: 200%;
     line-height: 1.5;
     position: relative;
-    padding: 0 0 0 60px;
+    padding: 0 0 0 50px;
 }
 li .marker {
     background: url(plus.png) 0 0 no-repeat;
@@ -150,6 +225,7 @@ ol li:nth-child(5) .marker { background-image: url(5-gelb-gruen.png); }
 ol li:nth-child(6) .marker { background-image: url(6-gelb.png); }
 ol li:nth-child(7) .marker { background-image: url(7-grau.png); }
 
-li li { font-size: 100%; }
+li li { font-size: 80%; }
 li li .marker,
 ol li li .marker { background-image: url(plus-grau.png); }
+li ul, li ol { margin-bottom: .2em; }

@@ -1,5 +1,6 @@
-$(function() {
-    var slides = $('section'),
+$(window).load(function() {
+    var $window = $(window),
+        slides = $('section'),
         current = 0;
 
     function mark() {
@@ -15,16 +16,16 @@ $(function() {
     $('body').bind('keydown', function(event) {
         switch(event.keyCode) {
             case 39:
+            case 32:
                 ++current;
                 mark();
-                break;
+                return false;
             case 37:
                 --current;
                 mark();
-                break;
-            default:
-                console.log(event);
+                return false;
         }
+        console.log(event);
     });
 
     // initialization
@@ -34,5 +35,21 @@ $(function() {
     }
     mark();
 
-    $('li').prepend('<span class="marker"></span>');
+    $('li, .numbered').prepend('<span class="marker"></span>');
+    $('section.numbered').each(function(i, e) {
+        $(e).addClass('n' + i);
+    });
+
+    $('section.image').each(function(i, e) {
+        var $img = $('img', this),
+            css = {
+                'backgroundImage': 'url(' + $img.attr('src') + ')'
+                };
+
+        if ($img.width() > $window.width() || $img.height() > $window.height())
+            css.backgroundSize = 'contain';
+
+        $(this).css(css);
+        $img.remove();
+    });
 });
