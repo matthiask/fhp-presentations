@@ -1,0 +1,3 @@
+[submodule "fhp"]
+	path = fhp
+	url = git://github.com/matthiask/fhp.git
