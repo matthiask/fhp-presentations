@@ -1,9 +1,29 @@
-// TODO rewrite the JS with document.querySelectorAll, Array.prototype.slice.call,
-// classList and friends so that it definitively does not work in old browsers
-// anymore :-)
-$(window).load(function() {
-    var $window = $(window),
-        slides = $('section'),
+__ = {
+    /* Thanks, http://dabblet.com/code/utopia.js */
+    list: function(expr, con) {
+        return Array.prototype.slice.call((con || document).querySelectorAll(expr));
+    }
+    , get: function(expr, con) {
+        return typeof expr === 'string'? (con || document).querySelector(expr) : expr;
+    }
+    , each: function(obj, func, context) {
+        context = context || obj;
+        for (var i in obj) {
+            if(obj.hasOwnProperty && obj.hasOwnProperty(i)) {
+                var ret = func.call(context, obj[i], i);
+
+                if(!!ret || ret === 0 || ret === '') {
+                    return ret;
+                }
+            }
+        }
+        return null;
+    }
+};
+
+
+window.addEventListener('load', function() {
+    var slides = __.list('section'),
         current = 0;
 
     function mark() {
@@ -12,11 +32,13 @@ $(window).load(function() {
 
         window.location.hash = 'slide' + current;
 
-        slides.filter('.current').removeClass('current');
-        slides.eq(current).addClass('current');
+        __.list('section.current').forEach(function(element) {
+            element.classList.remove('current');
+        });
+        slides[current].classList.add('current');
     }
 
-    $('body').bind('keydown', function(event) {
+    document.body.addEventListener('keydown', function(event) {
         switch(event.keyCode) {
             case 39:
             case 32:
@@ -38,21 +60,26 @@ $(window).load(function() {
     }
     mark();
 
-    $('li, .title').prepend('<span class="marker"></span>');
-    $('section.title').each(function(i, e) {
-        $(e).addClass('n' + i);
+    __.list('li').forEach(function(element) {
+        element.innerHTML = '<span class="marker"></span>' + element.innerHTML;
     });
-
-    $('section.image').each(function(i, e) {
-        var $img = $('img', this),
+    __.list('section.title').forEach(function(element, idx) {
+        element.innerHTML = '<span class="marker"></span>' + element.innerHTML;
+        element.classList.add('n' + idx);
+    });
+    __.list('section.image').forEach(function(element) {
+        var img = __.get('img', element),
             css = {
-                'backgroundImage': 'url(' + $img.attr('src') + ')'
+                'backgroundImage': 'url(' + img.getAttribute('src') + ')'
                 };
 
-        if ($img.width() > $window.width() || $img.height() > $window.height())
+        if (img.width > window.innerWidth || img.height > window.innerHeight)
             css.backgroundSize = 'contain';
 
-        $(this).css(css);
-        $img.remove();
+        __.each(css, function(value, key) {
+            element.style[key] = value;
+        });
+
+        img.parentNode.removeChild(img);
     });
 });
