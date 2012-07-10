@@ -1,0 +1,107 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>FHP</title>
+  <link rel="stylesheet" href="fhp/lato.css">
+  <link rel="stylesheet" href="fhp/style.css">
+  <script src="fhp/script.js"></script>
+</head
+<body>
+  <section class="intro">
+    <h1>FHP</h1>
+
+    <p>HTML-Präsentationen im Feinheit-Stil</p>
+  </section>
+  <section class="big">
+    <h2>Inhalt</h2>
+    <ol>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>Javascript</li>
+    </ol>
+  </section>
+
+  <section class="title">
+    <h1>HTML</h1>
+  </section>
+
+  <section class="big">
+    <h1>HTML</h1>
+    <pre><code>
+&lt;section class="big"&gt;
+  &lt;h1&gt;Django&lt;/h1&gt;
+  &lt;ul&gt;
+    &lt;li&gt;«The Web framework for perfectionists with deadlines.»&lt;/li&gt;
+    &lt;li&gt;Legt Konventionen fest, welche die Entwicklung in Teams
+    vereinfachen&lt;/li&gt;
+    &lt;li&gt;"Secure by default"&lt;/li&gt;
+    &lt;li&gt;djangoproject.com&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section class="image dark"&gt;
+  &lt;h1&gt;zff.com&lt;/h1&gt;
+  &lt;img src="feincms-zff.png" alt=""&gt;
+&lt;/section&gt;
+    </code></pre>
+  </section>
+
+  <section class="title">
+    <h1>CSS</h1>
+  </section>
+
+  <section class="big">
+    <h1>CSS</h1>
+    <pre><code>
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; }
+body { color: #393937; line-height: 1.4; }
+section {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 13% 20%;
+    transition: all 0.2s ease-out;
+    background-position: 50% 50%;
+    background-size: 100%;
+    opacity: 0;
+    z-index: 0;
+}
+section.current { opacity: 1; z-index: 1; }
+    </code></pre>
+  </section>
+
+  <section>
+    <h1>CSS Klassen für Slides</h1>
+    <ul>
+      <li><code>.intro</code>: Erste und letzte Seite</li>
+      <li><code>.title</code>: Zwischentitel</li>
+      <li><code>.big, .wide</code>: Viel Inhalt</li>
+      <li><code>.image, .dark, .bottom</code>: Bilder</li>
+      <li><code>.quote</code>: Zitat</li>
+    </ul>
+  </section>
+
+  <section class="title">
+    <h1>Javascript</h1>
+  </section>
+
+  <section>
+    <h1>Javascript</h1>
+    <ul>
+      <li><code>window.addEventListener('hashchange', function(){})</code></li>
+      <li><code>Array.forEach(function(element, index) {})</code></li>
+      <li><code>document.querySelector[All]()</code></li>
+      <li><code>element.classList.(add|remove)</code></li>
+    </ul>
+  </section>
+  <section class="intro">
+    <h1>Danke für die Aufmerksamkeit</h1>
+    <p>:-)</p>
+  </section>
+</body>
+</html>
