@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>FHP</title>
+  <link rel="stylesheet" href="fhp/lato.css">
+  <link rel="stylesheet" href="fhp/style.css">
+  <script src="fhp/script.js"></script>
+</head
+<body>
+  <section class="intro">
+    <h1>virtualenv</h1>
+  </section>
+  <section class="big">
+    <h2>Inhalt</h2>
+    <ol>
+      <li>Was ist virtualenv?</li>
+      <li>Projekt mit virtualenv aufsetzen</li>
+      <li>WSGI-Konfiguration</li>
+    </ol>
+  </section>
+
+  <section class="title">
+    <h1>Was ist virtualenv?</h1>
+  </section>
+  <section class="quote">
+    <blockquote>
+      <code>virtualenv</code> is a tool to create isolated
+      Python environments.
+    </blockquote>
+    <span class="author">www.virtualenv.org</span>
+  </section>
+  <section>
+    <h2>Warum?</h2>
+    <ul>
+      <li>
+        Server mit mehreren Projekten mit unterschiedlichen
+        Library-Versionen.
+      </li>
+      <li>
+        Explizit ist besser als implizit:<br>
+        <q>Explicitly declare and isolate dependencies</q>
+        (<a href="http://www.12factor.net/">www.12factor.net</a>)
+      </li>
+      <li>
+        Ein Blick in <code>requirements.txt</code> genügt, um eine
+        grobe Vorstellung davon zu erhalten, was das Projekt benötigt.
+      </li>
+    </ul>
+  </section>
+
+  <section class="title">
+    <h1>Projekt mit virtualenv aufsetzen</h1>
+  </section>
+
+  <section>
+    <pre><code>
+      $ mkdir -p /var/www/kunde/projekt/
+      $ cd /var/www/kunde/projekt/
+      $ virtualenv venv
+      $ source venv/bin/activate
+      $ cat &gt; requirements.txt &lt;&lt;EOD
+      Django==1.4
+      South&gt;=0.7.5
+      -e git://github.com/matthiask/towel.git#egg=towel
+      -e git://github.com/matthiask/plata.git@next#egg=plata
+      IPython&gt;=0.13
+      EOD
+      $ pip install -r requirements.txt
+      $ django-admin.py startproject myproject .
+      $ cat &gt; .gitignore &lt;&lt;EOD
+      *.pyc
+      /venv
+      EOD
+      $ git init
+      $ git add -A
+      $ git commit -m 'Initial commit'
+    </code></pre>
+  </section>
+
+  <section class="title">
+    <h1>WSGI-Konfiguration</h1>
+  </section>
+
+  <section>
+    <pre><code>
+$ git diff
+diff --git a/myproject/wsgi.py b/myproject/wsgi.py
+index 7740dfc..6fa5e0e 100644
+--- a/myproject/wsgi.py
++++ b/myproject/wsgi.py
+@@ -14,6 +14,13 @@ framework.
+
+ """
+ import os
+<span style="color:darkgreen">+import sys
++from os.path import abspath, dirname, join
++
++BASE_DIR = abspath(dirname(dirname(__file__)))
++
++sys.path.insert(0, BASE_DIR)
++activate_this = join(BASE_DIR, 'venv', 'bin', 'activate_this.py')
++execfile(activate_this, dict(__file__=activate_this))</span>
+
+ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myproject.settings")
+    </code></pre>
+  </section>
+  <section class="intro">
+    <h1>That's all.</h1>
+  </section>
+</body>
+</html>
