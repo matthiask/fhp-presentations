@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>django-email-registration</title>
+  <link rel="stylesheet" href="fhp/lato.css">
+  <link rel="stylesheet" href="fhp/style.css">
+  <script src="fhp/script.js"></script>
+</head
+<body>
+  <section class="intro">
+    <h1>django-email-registration</h1>
+
+    <!--
+    <p>Building websites with FeinCMS for fun and profit</p>
+    -->
+  </section>
+  <section class="big">
+    <h2>Inhalt</h2>
+    <ol>
+      <li>Was ist <code>django-email-registration</code>?</li>
+      <li>Warum nicht <code>django-registration</code>?</li>
+      <li>Verwendung</li>
+      <li>Exkurs: <code>django.core.signing</code></li>
+    </ol>
+  </section>
+
+  <section class="title">
+    <h1>Was ist <code>django-email-registration</code>?</h1>
+  </section>
+  <section class="big">
+    <h1><code>email-registration</code></h1>
+    <ul>
+      <li>Auf Seite registrieren, nur mit Angabe der Emailadresse</li>
+      <li>Benötigt <strong>keine</strong> Datenbank</li>
+      <li>Einfach und klein: 260 Zeilen Python inkl. Kommentare</li>
+      <li>Templates für einfache Anwendung schon dabei</li>
+      <li>Die Verwendung mit schon existierenden <code>User</code>-Instanzen
+        ist erlaubt und fix eingebaut (Beispiel Kundenaccounts Kee-Tab.com)</li>
+    </ul>
+  </section>
+
+  <section class="title">
+    <h1>Warum nicht <code>django-registration</code>?</h1>
+  </section>
+  <section class="big">
+    <h1><code>d.-registration</code></h1>
+    <ul>
+      <li>Keine Templates dabei, deshalb Einbindung jeweils umständlich</li>
+      <li>Wenn z.B. <code>django-social-auth</code> verwendet wird, kann das
+        Registrierungsformular von <code>registration</code> nicht sinnvoll
+        erweitert werden, weil es für <code>django-social-auth</code> nicht
+        verwendet wird.</li>
+      <li>Old-school Code, schlechte Projektführung: 7 Pull Requests auf
+        bitbucket offen, der älteste vom 20. April. Unkommentiert!</li>
+      <li>Ich will doch keinen Username auswählen!</li>
+    </ul>
+  </section>
+
+  <section class="title">
+    <h1>Verwendung</h1>
+  </section>
+  <section class="big">
+    <h1>Formular</h1>
+    <textarea style="width:730px;height:450px;border:none;">
+      <h2>{% trans "Send an activation link" %}</h2>
+      <form method="post" action="{% url "email_registration_form" %}"
+          class="well" id="registration">
+        {% csrf_token %}
+        <div class="controls">
+          <input id="id_email" type="text" name="email" maxlength="30"
+            placeholder="{% trans "E-mail address" %}">
+        </div>
+        <button type="submit" class="btn btn-primary">
+          {% trans "Register" %}</button>
+      </form>
+
+      <script>
+      function init_registration($) {
+        $('#registration').on('submit', function() {
+          var $form = $(this);
+          $.post(this.action, $form.serialize(), function(data) {
+            $('#registration').replaceWith(data);
+            init_registration($);
+          });
+          return false;
+        });
+      }
+      $(init_registration);
+      </script>
+    </textarea>
+  </section>
+  <section class="big">
+    <h1>Bestätigungsmail</h1>
+    <pre><code>
+Subject: Registration link
+From: no-reply@kee-tab.com
+To: test@example.com
+
+Click the following link to activate your account:
+
+http://localhost:8038/accounts/er/<strong>test@example.com:::1TYBIg:P0k2ZmBbWrOKBGYlGO8nju9yLyY</strong>/
+
+Please note that this link is only active for <strong>30 minutes</strong>. If you
+wait longer, you'll have to request another registration link.
+
+Warm regards
+    </code></pre>
+  </section>
+
+  <section class="centered">
+    <img src="django-email-registration/registration.png" alt="">
+  </section>
+
+  <section class="">
+    <ul>
+      <li>Die <code>User</code>-Instanz wird erst beim Abschicken des
+        Passwortformulares erstellt.</li>
+      <li>Die Datenbank bleibt sauber. Keine <code>cleanup</code>-Aufrufe
+        notwendig!</li>
+    </ul>
+  </section>
+
+  <section class="big">
+    <h1>Schon bestehende <code>User</code></h1>
+    <pre><code>
+from email_registration.utils import send_registration_mail
+
+send_registration_mail(user.email, request, user=user)
+    </code></pre>
+  </section>
+
+  <section class="title">
+    <h1>Exkurs: <code>django.core.signing</code></h1>
+  </section>
+
+  <section class="big">
+    <h1><code>django.core.signing</code></h1>
+    <pre><code>
+>>> from django.core.signing import TimestampSigner
+>>> signer = TimestampSigner(salt='something_salty')
+>>> signer.sign('value-to-be-signed')
+<strong>'value-to-be-signed:1TYBVw:gHYTOf-rpxIHVFYpxqgSaUblSYU'</strong>
+
+>>> signer.unsign('value-to-be-signed:1TYBVw:gHYTOf-rpxIHVFYpxqgSaUblSYU', max_age=1800)
+<strong>u'value-to-be-signed'</strong>
+
+>>> signer.unsign('value-to-be-signed:1TYBVw:gHYTOf-rpxIHVFYpxqgSaUblSYU', max_age=10)
+[...]
+<strong>SignatureExpired: Signature age 19.6970710754 > 10 seconds</strong>
+    </code></pre>
+  </section>
+
+  <section class="intro">
+    <h1>Danke für die Aufmerksamkeit</h1>
+    <p>:-)</p>
+  </section>
+</body>
+</html>
