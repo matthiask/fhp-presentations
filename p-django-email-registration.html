@@ -18,50 +18,47 @@
   <section class="big">
     <h2>Inhalt</h2>
     <ol>
-      <li>Was ist <code>django-email-registration</code>?</li>
-      <li>Warum nicht <code>django-registration</code>?</li>
-      <li>Verwendung</li>
-      <li>Exkurs: <code>django.core.signing</code></li>
+      <li>What is <code>django-email-registration</code>?</li>
+      <li>Why not <code>django-registration</code>?</li>
+      <li>Usage</li>
+      <li>Digression: <code>django.core.signing</code></li>
     </ol>
   </section>
 
   <section class="title">
-    <h1>Was ist <code>django-email-registration</code>?</h1>
+    <h1>What is <code>django-email-registration</code>?</h1>
   </section>
   <section class="big">
     <h1><code>email-registration</code></h1>
     <ul>
-      <li>Auf Seite registrieren, nur mit Angabe der Emailadresse</li>
-      <li>Benötigt <strong>keine</strong> Datenbank</li>
-      <li>Einfach und klein: 260 Zeilen Python inkl. Kommentare</li>
-      <li>Templates für einfache Anwendung schon dabei</li>
-      <li>Die Verwendung mit schon existierenden <code>User</code>-Instanzen
-        ist erlaubt und fix eingebaut (Beispiel Kundenaccounts Kee-Tab.com)</li>
+      <li>Register on-site, only by providing the email address</li>
+      <li>Does <strong>not</strong> require a database</li>
+      <li>Simple and clean: 260 lines of Python including comments</li>
+      <li>Templates are already included</li>
+      <li>It may also be used with existing <code>User</code>-instances
+        to validate email addresses and setting initial passwords</li>
     </ul>
   </section>
 
   <section class="title">
-    <h1>Warum nicht <code>django-registration</code>?</h1>
+    <h1>Why not <code>django-registration</code>?</h1>
   </section>
   <section class="big">
     <h1><code>d.-registration</code></h1>
     <ul>
-      <li>Keine Templates dabei, deshalb Einbindung jeweils umständlich</li>
-      <li>Wenn z.B. <code>django-social-auth</code> verwendet wird, kann das
-        Registrierungsformular von <code>registration</code> nicht sinnvoll
-        erweitert werden, weil es für <code>django-social-auth</code> nicht
-        verwendet wird.</li>
-      <li>Old-school Code, schlechte Projektführung: 7 Pull Requests auf
-        bitbucket offen, der älteste vom 20. April. Unkommentiert!</li>
-      <li>Ich will doch keinen Username auswählen!</li>
+      <li>Does not come with templates, because of that always laborious to use</li>
+      <li>Extending the registration form vs. social authentication methods</li>
+      <li>Old-school code, bad project management: 11 open pull requests on bitbucket,
+        the oldest of April 20. still uncommented</li>
+      <li>I <em>really</em> do not want to choose another username</li>
     </ul>
   </section>
 
   <section class="title">
-    <h1>Verwendung</h1>
+    <h1>Usage</h1>
   </section>
   <section class="big">
-    <h1>Formular</h1>
+    <h1>Form</h1>
     <textarea style="width:730px;height:450px;border:none;">
       <h2>{% trans "Send an activation link" %}</h2>
       <form method="post" action="{% url "email_registration_form" %}"
@@ -91,10 +88,10 @@
     </textarea>
   </section>
   <section class="big">
-    <h1>Bestätigungsmail</h1>
+    <h1>Confirmation mail</h1>
     <pre><code>
 Subject: Registration link
-From: no-reply@kee-tab.com
+From: no-reply@example.com
 To: test@example.com
 
 Click the following link to activate your account:
@@ -114,15 +111,15 @@ Warm regards
 
   <section class="">
     <ul>
-      <li>Die <code>User</code>-Instanz wird erst beim Abschicken des
-        Passwortformulares erstellt.</li>
-      <li>Die Datenbank bleibt sauber. Keine <code>cleanup</code>-Aufrufe
-        notwendig!</li>
+      <li>The <code>User</code> instance is created as late as possible: It only
+        exists if the password has been successfully set</li>
+      <li>The database is kept nice and clean, no <code>cleanup</code> invocations
+        necessary</li>
     </ul>
   </section>
 
   <section class="big">
-    <h1>Schon bestehende <code>User</code></h1>
+    <h1>Already existing <code>User</code>s</h1>
     <pre><code>
 from email_registration.utils import send_registration_mail
 
@@ -131,7 +128,7 @@ send_registration_mail(user.email, request, user=user)
   </section>
 
   <section class="title">
-    <h1>Exkurs: <code>django.core.signing</code></h1>
+    <h1>Digression: <code>django.core.signing</code></h1>
   </section>
 
   <section class="big">
@@ -152,8 +149,8 @@ send_registration_mail(user.email, request, user=user)
   </section>
 
   <section class="intro">
-    <h1>Danke für die Aufmerksamkeit</h1>
-    <p>:-)</p>
+    <h1>Thanks for listening</h1>
+    <p><code>https://github.com/matthiask/django-email-registration/</code></p>
   </section>
 </body>
 </html>
