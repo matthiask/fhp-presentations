@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>OSS</title>
+  <link rel="stylesheet" href="fhp/lato.css">
+  <link rel="stylesheet" href="fhp/style.css">
+  <script src="fhp/script.js"></script>
+</head>
+<body>
+  <section class="intro">
+    <h1>FeinCMS 1.7</h1>
+    <p>Noch kein Release, aber hoffentlich bald!</p>
+  </section>
+  <section class="big">
+    <h2>Inhalt</h2>
+    <ol>
+      <li>Extensions</li>
+      <li>Views</li>
+      <li><code>Page.redirect_to</code></li>
+      <li><code>app_reverse</code></li>
+    </ol>
+  </section>
+
+  <section class="big">
+    <h1>Extensions</h1>
+    <pre><code>
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
+from feincms import extensions
+
+class Extension(extensions.Extension):
+    ident = 'navigation'
+
+    def <strong>handle_model</strong>(self):
+        self.model.add_to_class('navigation_extension',
+            models.CharField(blank=True, max_length=200))
+
+    def <strong>handle_modeladmin</strong>(self, modeladmin):
+        modeladmin.add_extension_options(_('Navigation extension'), {
+            'fields': ('navigation_extension',),
+            'classes': ('collapse',),
+            })
+    </code></pre>
+  </section>
+
+  <section class="big">
+    <h1>Views</h1>
+    <a href="
+https://github.com/matthiask/feincms-elephantblog/commit/8af2b7520a454775de76aef490fc0a5fc2dfd6ef"
+      target="_blank">
+https://github.com/matthiask/feincms-elephantblog/commit/8af2b7520a454775de76aef490fc0a5fc2dfd6ef
+    </a>
+  </section>
+
+  <section class="big">
+    <h1><code>Page.redirect_to</code></h1>
+    <a href="http://tomac.feinheit.ch/admin/page/page/" target="_blank">
+      http://tomac.feinheit.ch/admin/page/page/
+    </a>
+  </section>
+
+  <section class="big">
+    <h1><code>app_reverse</code></h1>
+    <ul>
+      <li><code>reverse('app/view')</code> gibts nicht mehr</li>
+      <li>Stattdessen <code>app_reverse('view', 'app')</code></li>
+      <li>oder <code>{% app_reverse "view" "app" %}</code></li>
+      <li>Kein Patching von Django mehr</li>
+      <li>Explicit is better than implicit</li>
+    </ul>
+  </section>
+</body>
+</html>
